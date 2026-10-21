@@ -1,0 +1,108 @@
+* { box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  margin: 0; padding: 20px;
+  background: #f5f5f7;
+  color: #222;
+  display: flex; justify-content: center;
+}
+#app { max-width: 640px; width: 100%; }
+
+h1 { text-align: center; }
+.subtitle { text-align: center; color: #666; }
+
+/* ---------- Theme select ---------- */
+.theme-grid { display: grid; gap: 12px; margin-top: 24px; }
+.theme-btn {
+  padding: 20px; border: none; border-radius: 12px;
+  background: white; cursor: pointer; font-size: 1.1rem;
+  display: flex; justify-content: space-between; align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  transition: transform .1s;
+  text-align: left;
+}
+.theme-btn:hover { transform: translateY(-2px); }
+.theme-count { color: #888; font-size: .9rem; }
+
+/* ---------- Game screen ---------- */
+.game-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; gap: 8px;
+}
+.game-header button {
+  background: none; border: 1px solid #ccc;
+  border-radius: 6px; padding: 4px 10px; cursor: pointer;
+}
+
+.prompt { text-align: center; margin: 24px 0; }
+.pinyin { font-size: 2rem; font-weight: 600; }
+.meaning { color: #666; margin-top: 4px; }
+#play-audio {
+  margin-top: 12px; padding: 8px 16px;
+  border: none; border-radius: 20px;
+  background: #007aff; color: white; cursor: pointer;
+}
+
+.answer-slot {
+  display: flex; justify-content: center; gap: 8px;
+  min-height: 64px; margin: 20px 0;
+  font-size: 2rem;
+  border-bottom: 2px dashed #ccc;
+  padding-bottom: 12px;
+  flex-wrap: wrap;
+}
+.answer-char {
+  background: #e8f0fe; color: #1a73e8;
+  border-radius: 8px; padding: 4px 12px;
+  font-weight: bold;
+}
+.placeholder { color: #ccc; letter-spacing: 8px; align-self: center; }
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.tile {
+  aspect-ratio: 1; font-size: 1.6rem;
+  border: none; border-radius: 10px;
+  background: white; cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  transition: all .15s;
+}
+.tile:hover { background: #f0f4ff; }
+.tile.used { opacity: 0; pointer-events: none; }
+
+/* ---------- Wrong-answer shake ---------- */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); background: #ffdddd; }
+  40%      { transform: translateX(6px);  background: #ffdddd; }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px);  }
+}
+.tile.shake {
+  animation: shake 0.4s ease;
+  border: 2px solid #e55;
+}
+
+/* ---------- Correct completion flash ---------- */
+@keyframes correctFlash {
+  0%   { background: transparent; }
+  40%  { background: #d4f5d4; border-bottom-color: #2a2; }
+  100% { background: transparent; }
+}
+.answer-slot.correct-flash {
+  animation: correctFlash 0.7s ease;
+}
+
+/* ---------- Results screen ---------- */
+.results { text-align: center; margin-top: 60px; }
+.final-score { font-size: 3rem; font-weight: bold; margin: 20px 0; }
+.perfect-stat { color: #666; margin: 8px 0 24px; }
+.results button {
+  display: block; margin: 12px auto; padding: 12px 32px;
+  border: none; border-radius: 24px;
+  background: #007aff; color: white;
+  font-size: 1rem; cursor: pointer;
+}
